@@ -1,0 +1,16 @@
+name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - run: |
+          $env:Path = "C:\msys64\usr\bin;$env:Path"
+          wget https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-windows.zip
+          unzip premake-5.0.0-alpha15-windows.zip
+          ./premake5.exe gmake
+          cd .build/gmake
+          pacman -S --needed --noconfirm --noprogressbar gcc development
+          make
