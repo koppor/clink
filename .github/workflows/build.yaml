@@ -14,5 +14,4 @@ jobs:
           cd .build/gmake
           dir
           pacman -S --needed --noconfirm --noprogressbar gcc development
-          make help
-          mingw32-make
+          mingw32-make config=release_x64 clink_app_dll clink_app_exe
